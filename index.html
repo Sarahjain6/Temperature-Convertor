@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temperature Converter</title>
+<style>
+    /* Styles for the container */
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    /* Styles for the rounded container */
+    .rounded-container {
+        border-radius: 30px; /* Increased border radius */
+        background-color: #f0f0f0;
+        padding: 40px; /* Increased padding */
+        width: 400px; /* Increased width */
+        text-align: center;
+    }
+
+    /* Styles for input field and dropdown */
+    .temperature-input,
+    .conversion-select {
+        width: calc(100% - 20px);
+        margin-bottom: 20px; /* Increased margin */
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    /* Styles for temperature details */
+    .temperature-details {
+        font-size: 24px; /* Increased font size */
+        margin-bottom: 20px; /* Increased margin */
+    }
+
+    /* Styles for the rounded submit button */
+    .rounded-button {
+        border: none;
+        border-radius: 30px; /* Increased border radius */
+        padding: 15px 30px; /* Increased padding */
+        background-color: #3498db;
+        color: white;
+        font-size: 20px; /* Increased font size */
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="rounded-container">
+        <h1>Temperature Converter</h1>
+        <input type="number" id="temperatureInput" class="temperature-input" placeholder="Enter temperature">
+        <select id="conversionSelect" class="conversion-select">
+            <option value="toFahrenheit">Celsius to Fahrenheit</option>
+            <option value="toCelsius">Fahrenheit to Celsius</option>
+        </select>
+        <div class="temperature-details">
+            <strong>Converted Temperature:</strong> <span id="convertedTemperature">25</span>°
+        </div>
+        <button class="rounded-button" onclick="convertTemperature()">Convert</button>
+    </div>
+</div>
+
+<script>
+    function convertTemperature() {
+        var temperature = parseFloat(document.getElementById('temperatureInput').value);
+        if (isNaN(temperature)) {
+            alert('Please enter a valid temperature.');
+            return;
+        }
+        var conversionType = document.getElementById('conversionSelect').value;
+        var convertedTemperature;
+        if (conversionType === 'toFahrenheit') {
+            convertedTemperature = (temperature * 9/5) + 32;
+        } else {
+            convertedTemperature = (temperature - 32) * 5/9;
+        }
+        document.getElementById('convertedTemperature').innerText = convertedTemperature.toFixed(2);
+        document.querySelector('.temperature-details strong').textContent = 'Converted Temperature (°):';
+    }
+</script>
+
+</body>
+</html>
